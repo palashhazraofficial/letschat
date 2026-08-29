@@ -1,0 +1,33 @@
+* {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: rgb(49, 49, 243);
+}
+
+.signin-container {
+  height: 350px;
+  width: 100%;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  float: left;
+}
+
+.inputBox {
+  border: 2px solid rgb(49, 49, 243);
+  border-radius: 5px;
+  height: 30px;
+  width: 90%;
+  margin: 10px 0 10px 0;
+}
+
+.signin-btn {
+  border: none;
+  background-color: rgb(49, 49, 243);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
