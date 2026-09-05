@@ -17,6 +17,10 @@ function signinRequest (userName, userPasswordStr, userPinStr) {
                 jsonArray = JSON.parse(data); 
                 let newItem = {"userName" : userName, "userPassword" : userPasswordStr};
                 jsonArray.push(newItem);
+
+                // Render Log
+                console.log("JSON ARRAY: ", jsonArray);
+                
             } else {
                 console.log("Error Occured: ", err);
             }
