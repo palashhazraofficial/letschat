@@ -6,21 +6,28 @@ function signinRequest (userName, userPasswordStr, userPinStr) {
 
     if (checkPin(userPinStr)) {
 
-        console.log("Pin Mached");
-        
-        let filePath = `../data/password/${userName}.json`;
+        console.log("Pin Matched!");
 
-        let userData = {
-            "userName" : userName,
-            "userPassword" : userPasswordStr,
-        }
+        const jsonFilePath = path.join(__dirname, "../data/password/password.json");
+        let jsonArray = [];
 
-        let userDataString = JSON.stringify(userData, null, 2);
+        fs.readFile(jsonFilePath, 'utf8', (err, data) => {
 
-        fs.writeFile(filePath, userDataString, 'utf8', (err) => {
-            if (err) {
+            if(!err) {
+                jsonArray = JSON.parse(data); 
+                let newItem = {"userName" : userName, "userPassword" : userPasswordStr};
+                jsonArray.push(newItem);
+            } else {
                 console.log("Error Occured: ", err);
             }
+
+            fs.writeFile(jsonFilePath, JSON.stringify(jsonArray, null, 2), 'utf8', (err) => {
+                if (err) {
+                console.log("Error Occured: ", err);
+                }
+            })
+
+
         })
 
     } else {

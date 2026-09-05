@@ -3,6 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 
 const hashcodeGenerator = require("./modules/hashcodeGenerator.js");
+const hashcode = require("./modules/hashcode.js");
 
 const app = express();
 
@@ -10,10 +11,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded());
 
 app.post('/', (req, res, next) => {
-  console.log(req.body);
   let inputData = req.body;
-  let inputDataStr = hashcodeGenerator(inputData);
-  console.log(inputDataStr);
+  hashcodeGenerator(inputData);
   res.redirect('/');
 })
 
