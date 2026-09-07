@@ -5,26 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="signin_login.css">
-  <title>LetsChat | Signin</title>
+  <title>LetsChat | Login</title>
 </head>
 <body>
   <div class="content">
     <div class="signin-container">
-      <div style="font-size: 30px; color: white; text-align: center; font-weight: bolder; margin: 10px 0 10px 0">Fill Details To Signin</div>
-      <form action="/" method="POST">
+      <div style="font-size: 30px; color: white; text-align: center; font-weight: bolder; margin: 10px 0 10px 0">Fill Details To Login</div>
+      <form action="/chatroom" method="POST">
         <div>Full Name</div>
         <input type="text" placeholder="Enter Your Full Name Here" name="userName" class="inputBox">
         <div>Password</div>
         <input type="password" placeholder="Enter a Strong Password" name="userPassword" class="inputBox">
-        <div>Admin Pin</div>
-        <input type="password" placeholder="Enter The Admin Pin" name="userPin" class="inputBox">
-        <div><input type="submit" value="Sign in" class="signin-btn"></div>
+        <div><input type="submit" value="Login" class="signin-btn"></div>
       </form>
     </div>
     <hr/>
     <div class="btns-container">
       <div><a href="/"><button class="home-btn">Back To Home</button></a></div>
-      <div><a href="/login"><button class="login-btn">Login</button></a></div>
+      <div><a href="/signin"><button class="login-btn">Sign in</button></a></div>
     </div>
   </div>
 </body>
