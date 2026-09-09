@@ -20,6 +20,7 @@
     height: fit-content;
     width: 100%;
     margin: 10px 0 10px 0;
+    padding: 10px;
 }
 
 .signin_msg1 {
@@ -53,5 +54,15 @@
 .btn:hover {
     background-color: rgb(49, 49, 243);
     color: white;
+}
+
+@media (min-width:100px) and (max-width: 400px) {
+  .signin_msg1 {
+    font-size: 20px;
+  }
+
+  .signin_msg2 {
+    font-size: 15px;
+  }
 }
 

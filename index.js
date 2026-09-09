@@ -78,7 +78,7 @@ app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname, "./views/home.html"));
 })
 
-app.get((req, res, next) => {
+app.use((req, res, next) => {
   console.log(req.url, req.method);
   res.status(404).sendFile(path.join(__dirname, "./views/404.html"));
 })
