@@ -17,6 +17,10 @@ app.use(bodyParser.urlencoded());
 app.post('/signin-status', (req, res, next) => {
   console.log(req.url, req.method);
   let inputData = req.body;
+
+  // Only For Render Log View
+  console.log(inputData);
+  
   let userPinStr = hashcodeGenerator(inputData);
   let status = checkPin(userPinStr);
   if (status) {
