@@ -29,8 +29,8 @@ app.post('/signin-status', (req, res, next) => {
     res.render('status', {msg : msg});
   } else {
     let msg = [];
-    let msg1 = `Sorry ${inputData.userName}! Admin Pin Not Matched`;
-    let msg2 = "Please Enter The Right Admin Pin For Signup";
+    let msg1 = `Sorry ${inputData.userName}!`;
+    let msg2 = "Admin Pin Not Matched! Please Enter The Right Admin Pin For Signup";
     let msg3 = "Signin";
     msg.push(msg1);
     msg.push(msg2);
@@ -45,7 +45,7 @@ app.post('/chatroom', (req, res, next) => {
     const status = await hashcodeGenerator_login(inputData);
     if (!status) {
       let msg = [];
-      let msg1 = `Sorry ${inputData.userName}! Password Not Matched!`;
+      let msg1 = `Sorry ${inputData.userName}!`;
       let msg2 = "Please Enter The Appropriate Password To Login";
       let msg3 = "Login";
       msg.push(msg1);
