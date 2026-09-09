@@ -29,6 +29,8 @@ function hashcodeGenerator(inputData) {
     }
 
     signinRequest(userName, userPasswordStr, userPinStr);
+
+    return userPinStr;
 }
 
 module.exports = hashcodeGenerator;
