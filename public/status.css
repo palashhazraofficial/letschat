@@ -1,0 +1,57 @@
+* {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  color: white;
+}
+
+.home-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-image: url(resources/background-img.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.signin_msg1, .signin_msg2 {
+    height: fit-content;
+    width: 100%;
+    margin: 10px 0 10px 0;
+}
+
+.signin_msg1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.signin_msg2 {
+    font-size: 20px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.btn {
+    float: left;
+    height: 30px;
+    width: fit-content;
+    background-color: white;
+    font-size: 20px;
+    color: rgb(49, 49, 243);
+    border: 2px solid rgb(49, 49, 243);
+    border-radius: 5px;
+    margin: 10px 0 10px 0;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: rgb(49, 49, 243);
+    color: white;
+}
+
