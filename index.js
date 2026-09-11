@@ -53,7 +53,7 @@ app.post('/chatroom', (req, res, next) => {
       msg.push(msg3);
       res.render('status', {msg : msg});
     } else {
-      res.redirect('/chatroom');
+      res.sendFile(path.join(__dirname, "./views/chatroom.html"));
     }
   }
   loginRequest();

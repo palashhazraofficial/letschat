@@ -1,0 +1,69 @@
+.home-container {
+    height: 100vh;
+    width: 100%;
+    background-image: url(resources/background-img.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chat-container {
+    height: 80%;
+    width: 70%;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.199);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction:column;
+}
+
+.chats {
+    height: 90%;
+    width: 100%;
+    overflow-y: auto;  
+    overflow-x: hidden;
+}
+
+.chat-input {
+    height: 10%;
+    width: 100%;
+}
+
+.form-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-input-box {
+    height: 80%;
+    width: 80%;
+    border-radius: 10px;
+    margin: 10px;
+    border: 2px solid white; 
+}
+
+.chat-input-box:focus {
+    border: 2px solid rgb(49, 49, 243);
+    outline: none;
+}
+
+.chat-send-btn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 2px solid white;
+    color: rgb(49, 49, 243);
+    cursor: pointer;
+}
+
+.chat-send-btn:hover {
+    border: 2px solid rgb(49, 49, 243);
+}
