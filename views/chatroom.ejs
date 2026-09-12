@@ -10,13 +10,25 @@
 <body>
     <div class="home-container">
         <div class="chat-container">
-            <div class="chats"></div>
+
+            <div class="chats">
+                <% chatmsg.forEach((chat) => {%>
+                    <div class="chatBox">
+                        <div class="msg"><%= chat.msg %></div>
+                        <div class="userName"><%= chat.userName %></div>
+                        <div class="sendTime"><%= chat.sendTime %></div>
+                    </div>
+                <% }); %>
+                <div id="latest-message"></div>
+            </div>
+
             <div class="chat-input">
                 <form action="chatroom" method="POST" class="form-container">
                     <input type="text" name="chat" placeholder=" Start Chatting..." class="chat-input-box">
                     <button class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
                 </form>
             </div>
+
         </div>
     </div>
 </body>
