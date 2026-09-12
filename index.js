@@ -37,13 +37,18 @@ app.post('/chatroom', isAuthenticated, (req, res, next) => {
   let msg = req.body.chat;
   let sendTime = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
   hashcodeGenerator_chats(userName, msg, sendTime);
-  res.redirect('/chatroom#latest-message');
+  res.sendStatus(200); 
 });
 
 app.get('/chatroom', isAuthenticated, (req, res, next) => { 
   console.log(req.url, req.method);
   let chatmsg = reverseHashCode_chats();
   res.render('chatroom', {chatmsg : chatmsg});
+});
+
+app.get('/api/chats', isAuthenticated, (req, res, next) => {
+  let chatmsg = reverseHashCode_chats();
+  res.json({ chatmsg: chatmsg });
 });
 
 app.post('/signin-status', (req, res, next) => {

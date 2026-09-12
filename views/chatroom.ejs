@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="2">
     <link rel="stylesheet" href="chatroom.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cloudflare.com" />
     <title>LetsChat | Chatroom</title>
 </head>
 <body>
     <div class="home-container">
         <div class="chat-container">
 
-            <div class="chats">
+            <div class="chats" id="chatWindow">
                 <% chatmsg.forEach((chat) => {%>
                     <div class="chatBox">
                         <div class="msg"><%= chat.msg %></div>
@@ -24,13 +23,83 @@
             </div>
 
             <div class="chat-input">
-                <form action="chatroom" method="POST" class="form-container">
-                    <input type="text" name="chat" placeholder=" Start Chatting..." class="chat-input-box">
-                    <button class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+                <form id="chatForm" class="form-container">
+                    <input type="text" id="chatInputBox" name="chat" placeholder=" Start Chatting..." class="chat-input-box" required autocomplete="off">
+                    <button type="submit" class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
                 </form>
             </div>
 
         </div>
     </div>
+
+    <script>
+        const chatForm = document.getElementById('chatForm');
+        const chatInputBox = document.getElementById('chatInputBox');
+        const chatWindow = document.getElementById('chatWindow');
+
+        function scrollToBottom() {
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+
+        scrollToBottom();
+
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop form submission page reload
+            
+            const messageText = chatInputBox.value;
+            if (!messageText.trim()) return;
+
+            const formData = new URLSearchParams();
+            formData.append('chat', messageText);
+
+            fetch('/chatroom', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: formData.toString()
+            })
+            .then(response => {
+                if (response.ok) {
+                    chatInputBox.value = ''; 
+                    updateChatsSilently();  
+                }
+            })
+            .catch(err => console.error("Error sending message: ", err));
+        });
+
+        function updateChatsSilently() {
+            fetch('/api/chats')
+                .then(res => res.json())
+                .then(data => {
+                    chatWindow.innerHTML = '';
+                    
+                    data.chatmsg.forEach(chat => {
+                        const chatBox = document.createElement('div');
+                        chatBox.className = 'chatBox';
+                        chatBox.innerHTML = `
+                            <div class="msg"></div>
+                            <div class="userName"></div>
+                            <div class="sendTime"></div>
+                        `;
+
+                        chatBox.querySelector('.msg').textContent = chat.msg;
+                        chatBox.querySelector('.userName').textContent = chat.userName;
+                        chatBox.querySelector('.sendTime').textContent = chat.sendTime;
+                        
+                        chatWindow.appendChild(chatBox);
+                    });
+
+                    const anchor = document.createElement('div');
+                    anchor.id = 'latest-message';
+                    chatWindow.appendChild(anchor);
+                    
+                    scrollToBottom();
+                })
+                .catch(err => console.error("Error fetching chats: ", err));
+        }
+
+        setInterval(updateChatsSilently, 1500);
+    </script>
 </body>
 </html>
