@@ -1,10 +1,13 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
+const session = require("express-session"); 
 
 const hashcodeGenerator = require("./modules/hashcodeGenerator.js");
 const checkPin = require("./modules/checkPin.js")
 const hashcodeGenerator_login = require("./modules/hashcodeGenerator_login.js");
+const hashcodeGenerator_chats = require("./modules/hashcodeGenerator_chats.js");
+const reverseHashCode_chats = require("./modules/reverseHashCode_chats.js");
 const hashcode = require("./modules/hashcode.js");
 
 const app = express();
@@ -13,6 +16,35 @@ app.set('views', 'views');
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded());
+
+app.use(session({
+  secret: 'palashhazra-lkjhgfdsa-123456789-poiuytrewq', 
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 3600000 }
+}));
+
+const isAuthenticated = (req, res, next) => {
+  if (req.session && req.session.isLoggedIn) {
+      return next(); 
+  }
+  res.redirect('/login');
+};
+
+app.post('/chatroom', isAuthenticated, (req, res, next) => { 
+  console.log(req.url, req.method); 
+  let userName = req.session.userName;
+  let msg = req.body.chat;
+  let sendTime = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+  hashcodeGenerator_chats(userName, msg, sendTime);
+  res.redirect('/chatroom#latest-message'); 
+});
+
+app.get('/chatroom', isAuthenticated, (req, res, next) => { 
+  console.log(req.url, req.method);
+  let chatmsg = reverseHashCode_chats();
+  res.render('chatroom', {chatmsg : chatmsg});
+});
 
 app.post('/signin-status', (req, res, next) => {
   console.log(req.url, req.method);
@@ -38,7 +70,7 @@ app.post('/signin-status', (req, res, next) => {
   }
 })
 
-app.post('/chatroom', (req, res, next) => {
+app.post('/chatroom-login', (req, res, next) => {
   console.log(req.url, req.method);
   let inputData = req.body;
   async function loginRequest() {
@@ -52,8 +84,15 @@ app.post('/chatroom', (req, res, next) => {
       msg.push(msg2);
       msg.push(msg3);
       res.render('status', {msg : msg});
-    } else {
-      res.redirect('/chatroom');
+    } else {    
+      req.session.isLoggedIn = true;
+      req.session.userName = inputData.userName; 
+      req.session.save((err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect('/chatroom');
+      });
     }
   }
   loginRequest();
