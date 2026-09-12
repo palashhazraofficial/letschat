@@ -37,7 +37,7 @@ app.post('/chatroom', isAuthenticated, (req, res, next) => {
   let msg = req.body.chat;
   let sendTime = new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
   hashcodeGenerator_chats(userName, msg, sendTime);
-  res.redirect('/chatroom#latest-message'); 
+  res.redirect('/chatroom#latest-message');
 });
 
 app.get('/chatroom', isAuthenticated, (req, res, next) => { 

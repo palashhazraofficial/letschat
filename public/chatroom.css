@@ -106,3 +106,10 @@
 .chat-send-btn:hover {
     border: 2px solid rgb(49, 49, 243);
 }
+
+@media (min-width:100px) and (max-width: 400px) {
+    .chat-container {
+        height: 90%;
+        width: 90%;
+    }
+}
